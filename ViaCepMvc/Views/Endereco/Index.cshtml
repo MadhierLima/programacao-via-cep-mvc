@@ -1,0 +1,64 @@
+@model ViaCepMvc.Models.Endereco
+
+<h2>Consulta de CEP</h2>
+
+<form asp-action="Confirmar" method="post">
+
+    <div>
+        <label>CEP:</label><br />
+        <input type="text" id="cep" name="Cep" />
+        <button type="button" id="btnBuscar">Buscar CEP</button>
+    </div>
+
+    <br />
+
+    <div>
+        <label>Logradouro:</label><br />
+        <input type="text" id="logradouro" name="Logradouro" />
+    </div>
+
+    <br />
+
+    <div>
+        <label>Bairro:</label><br />
+        <input type="text" id="bairro" name="Bairro" />
+    </div>
+
+    <br />
+
+    <div>
+        <label>Cidade:</label><br />
+        <input type="text" id="cidade" name="Cidade" />
+    </div>
+
+    <br />
+
+    <div>
+        <label>UF:</label><br />
+        <input type="text" id="uf" name="Uf" />
+    </div>
+
+    <br />
+
+    <button type="submit">Enviar</button>
+
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$("#btnBuscar").click(function () {
+
+    var cep = $("#cep").val();
+
+    $.getJSON("https://viacep.com.br/ws/" + cep + "/json/", function (data) {
+
+        $("#logradouro").val(data.logradouro);
+        $("#bairro").val(data.bairro);
+        $("#cidade").val(data.localidade);
+        $("#uf").val(data.uf);
+
+    });
+
+});
+</script>
